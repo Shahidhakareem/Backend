@@ -1,0 +1,14 @@
+const jwt = require("jsonwebtoken");
+
+module.exports = (req, res, next) => {
+  try {
+    const token = req.headers.authorization.split(" ")[1]; // Bearer <token>
+    const decoded = jwt.verify(token, process.env.JWT_KEY);
+    req.userData = decoded; // ✅ attaches role and user info
+    next();
+  } catch (error) {
+    return res.status(401).json({
+      message: "Auth failed: Invalid or missing token",
+    });
+  }
+};
