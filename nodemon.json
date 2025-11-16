@@ -1,6 +1,6 @@
 {
-   "env":{
-    "MONGO_ATLAS_PW":"node-shop",
-    "JWT_KEY":"secret"
-   } 
+  "env": {
+    "MONGO_URL": "mongodb+srv://node-shop:node-shop@node-rest-shop.pirjpb5.mongodb.net/?appName=node-rest-shop",
+    "JWT_KEY": "secret"
+  }
 }

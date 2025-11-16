@@ -53,11 +53,11 @@ exports.user_login = async (req, res) => {
       return res.status(401).json({ message: "Invalid email or password" });
     }
 
-    const token = jwt.sign(
-      { email: user.email, userId: user._id, role: user.role },
-      process.env.JWT_KEY,
-      { expiresIn: "1h" }
-    );
+ const token = jwt.sign(
+  { email: user.email, userId: user._id, role: user.role },
+  process.env.JWT_KEY, // <-- must exist
+  { expiresIn: "1h" }
+);
 
     res.status(200).json({
       message: "Auth successful",
