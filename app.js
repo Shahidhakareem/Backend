@@ -15,13 +15,18 @@ const courseRoutes = require("./api/routes/courses");
 const app = express();
 
 // --- Middlewares ---
-app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || origin.startsWith("http://localhost")) callback(null, true);
-    else callback(new Error("Not allowed by CORS"));
-  },
-  credentials: true,
-}));
+const cors = require("cors");
+
+app.use(
+  cors({
+    origin: [
+      "https://frontend-git-main-shahidha-abdul-kareems-projects.vercel.app",
+      "http://localhost:5173", // optional: for local dev
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true,
+  })
+);
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
