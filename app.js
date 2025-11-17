@@ -17,16 +17,18 @@ const app = express();
 // --- Middlewares ---
 
 const allowedOrigins = [
-  "http://localhost:5173", // local frontend
-  "https://frontend-git-main-shahidha-abdul-kareems-projects.vercel.app" // deployed frontend
+  "https://frontend-git-main-shahidha-abdul-kareems-projects.vercel.app", // your deployed frontend
+  "http://localhost:5173" // local frontend for development
 ];
 
 app.use(cors({
   origin: function(origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
+    // allow requests with no origin (like curl or mobile apps)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      callback(new Error("Not allowed by CORS"));
+      callback(new Error("CORS not allowed for this origin"));
     }
   },
   credentials: true
