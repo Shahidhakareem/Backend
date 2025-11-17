@@ -16,17 +16,22 @@ const app = express();
 
 // --- Middlewares ---
 
+const allowedOrigins = [
+  "http://localhost:5173", // local frontend
+  "https://frontend-git-main-shahidha-abdul-kareems-projects.vercel.app" // deployed frontend
+];
 
-app.use(
-  cors({
-    origin: [
-      "https://frontend-git-main-shahidha-abdul-kareems-projects.vercel.app",
-      "http://localhost:5173", // optional: for local dev
-    ],
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: function(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
+}));
+
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
