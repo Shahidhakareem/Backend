@@ -17,7 +17,7 @@ const app = express();
 // --- Middlewares ---
 
 const allowedOrigins = [
-  "https://frontend-git-main-shahidha-abdul-kareems-projects.vercel.app", // your deployed frontend
+  "https://frontend-two-mu-20.vercel.app/", // your deployed frontend
   "http://localhost:5173" // local frontend for development
 ];
 
